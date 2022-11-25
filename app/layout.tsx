@@ -1,3 +1,5 @@
+import Provider from './Provider';
+
 export default function RootLayout({
   children,
 }: {
@@ -7,7 +9,10 @@ export default function RootLayout({
     <html>
       <head></head>
       <body>
-        {children}
+        {
+          /* @ts-expect-error Server Component */
+          <Provider>{children}</Provider>
+        }
       </body>
     </html>
   );

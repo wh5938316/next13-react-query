@@ -1,11 +1,19 @@
 "use client";
 
-import { Hydrate } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import fetchTest from "./fetchTest";
 
-export default function Content({
-  dehydratedState,
-}: {
-  dehydratedState?: unknown;
-}) {
-  return <Hydrate state={dehydratedState}>hello</Hydrate>;
+export default function Content() {
+
+  const { data, isLoading, isError } = useQuery<string>(['test'], fetchTest);
+
+  if(isLoading) {
+    return  <div>Loading...</div>
+  };
+
+  if(isError) {
+    return <div>Error</div>
+  }
+  
+  return <div>{data}</div>
 }
